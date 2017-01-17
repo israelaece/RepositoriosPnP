@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="RepositoriosPnP"
+                   namespace="RepositoriosPnP.Dominio">
+  <class name="Empresa">
+    <id name="Id">
+      <generator class="identity" />
+    </id>
+    <property name="RazaoSocial"
+              not-null="true">
+      <column name="RazaoSocial"
+              not-null="true"
+              sql-type="varchar(120)" />
+    </property>
+    <property name="Cnpj"
+              not-null="true">
+      <column name="Cnpj"
+              not-null="true"
+              sql-type="varchar(15)" />
+    </property>
+  </class>
+  <class name="Cliente">
+    <id name="Id">
+      <generator class="identity" />
+    </id>
+    <many-to-one name="Empresa"
+                 column="EmpresaId"
+                 not-null="true"
+                 cascade="save-update"
+                 class="Empresa" />
+    <property name="Ativo"
+              not-null="true" />
+  </class>
+</hibernate-mapping>
